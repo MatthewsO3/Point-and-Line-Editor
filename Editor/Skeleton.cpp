@@ -1,36 +1,4 @@
-//=============================================================================================
-// Mintaprogram: Zöld háromszög. Ervenyes 2019. osztol.
-//
-// A beadott program csak ebben a fajlban lehet, a fajl 1 byte-os ASCII karaktereket tartalmazhat, BOM kihuzando.
-// Tilos:
-// - mast "beincludolni", illetve mas konyvtarat hasznalni
-// - faljmuveleteket vegezni a printf-et kiveve
-// - Mashonnan atvett programresszleteket forrasmegjeloles nelkul felhasznalni es
-// - felesleges programsorokat a beadott programban hagyni!!!!!!!
-// - felesleges kommenteket a beadott programba irni a forrasmegjelolest kommentjeit kiveve
-// ---------------------------------------------------------------------------------------------
-// A feladatot ANSI C++ nyelvu forditoprogrammal ellenorizzuk, a Visual Studio-hoz kepesti elteresekrol
-// es a leggyakoribb hibakrol (pl. ideiglenes objektumot nem lehet referencia tipusnak ertekul adni)
-// a hazibeado portal ad egy osszefoglalot.
-// ---------------------------------------------------------------------------------------------
-// A feladatmegoldasokban csak olyan OpenGL fuggvenyek hasznalhatok, amelyek az oran a feladatkiadasig elhangzottak
-// A keretben nem szereplo GLUT fuggvenyek tiltottak.
-//
-// NYILATKOZAT
-// ---------------------------------------------------------------------------------------------
-// Nev    :
-// Neptun :
-// ---------------------------------------------------------------------------------------------
-// ezennel kijelentem, hogy a feladatot magam keszitettem, es ha barmilyen segitseget igenybe vettem vagy
-// mas szellemi termeket felhasznaltam, akkor a forrast es az atvett reszt kommentekben egyertelmuen jeloltem.
-// A forrasmegjeloles kotelme vonatkozik az eloadas foliakat es a targy oktatoi, illetve a
-// grafhazi doktor tanacsait kiveve barmilyen csatornan (szoban, irasban, Interneten, stb.) erkezo minden egyeb
-// informaciora (keplet, program, algoritmus, stb.). Kijelentem, hogy a forrasmegjelolessel atvett reszeket is ertem,
-// azok helyessegere matematikai bizonyitast tudok adni. Tisztaban vagyok azzal, hogy az atvett reszek nem szamitanak
-// a sajat kontribucioba, igy a feladat elfogadasarol a tobbi resz mennyisege es minosege alapjan szuletik dontes.
-// Tudomasul veszem, hogy a forrasmegjeloles kotelmenek megsertese eseten a hazifeladatra adhato pontokat
-// negativ elojellel szamoljak el es ezzel parhuzamosan eljaras is indul velem szemben.
-//=============================================================================================
+
 #include "framework.h"
 
 // vertex shader in GLSL: It is a Raw string (C++11) since it contains new line characters
@@ -151,11 +119,11 @@ public:
     static void translateLineToPoint(vec3& linePoint1, vec3& linePoint2, vec3 point) {
 
 
-        // Egyenes egyik végpontjának és az adott pontnak a különbsége
-        vec3 oldMidPoint = (linePoint1 + linePoint2) / 2.0f; // Az eredeti egyenes középpontja
-        vec3 translation = point - oldMidPoint; // Az eltolási vektor
+        // Egyenes egyik vï¿½gpontjï¿½nak ï¿½s az adott pontnak a kï¿½lï¿½nbsï¿½ge
+        vec3 oldMidPoint = (linePoint1 + linePoint2) / 2.0f; // Az eredeti egyenes kï¿½zï¿½ppontja
+        vec3 translation = point - oldMidPoint; // Az eltolï¿½si vektor
 
-        linePoint1 =linePoint1 + translation; // Az egyenes elsõ végpontjának eltolása
+        linePoint1 =linePoint1 + translation; // Az egyenes elsï¿½ vï¿½gpontjï¿½nak eltolï¿½sa
         linePoint2 =linePoint2 + translation; //
     }
 
@@ -175,7 +143,7 @@ public:
         float det = d1.x * d2.y - d1.y * d2.x;
 
         if (det == 0) {
-            return vec3(0, 0, 0); // Egyenesek párhuzamosak, nincs metszéspont
+            return vec3(0, 0, 0); // Egyenesek pï¿½rhuzamosak, nincs metszï¿½spont
         }
 
         float t = ((p3.x - p1.x) * d2.y - (p3.y - p1.y) * d2.x) / det;
@@ -184,7 +152,7 @@ public:
         if (t >= 0 && t <= 1 && s >= 0 && s <= 1) {
             return vec3(p1.x + d1.x * t, p1.y + d1.y * t, 1);
         } else {
-            return vec3(0, 0, 0); // A két szakasz nem metszi egymást
+            return vec3(0, 0, 0); // A kï¿½t szakasz nem metszi egymï¿½st
         }
     }
 
@@ -229,16 +197,16 @@ public:
     int near_line(vec3 p)
             {
 
-                int nearestIndex = -1; // Az index, ahol a legközelebbi egyenes található
+                int nearestIndex = -1; // Az index, ahol a legkï¿½zelebbi egyenes talï¿½lhatï¿½
 
-                for (int i = 0; i < lines.Vtx().size(); i += 2) { // Minden második pont egy egyenes kezdõpontja
+                for (int i = 0; i < lines.Vtx().size(); i += 2) { // Minden mï¿½sodik pont egy egyenes kezdï¿½pontja
                     vec3 linePoint1 = lines.Vtx()[i];
                     vec3 linePoint2 = lines.Vtx()[i + 1];
 
-                    // Az egyenesre merõleges távolság kiszámítása a ponttól
+                    // Az egyenesre merï¿½leges tï¿½volsï¿½g kiszï¿½mï¿½tï¿½sa a ponttï¿½l
                     float distanceToLine = distance(p, linePoint1, linePoint2);
 
-                    // Ha ez a távolság a jelenlegi legkisebb távolságnál kisebb, akkor frissítjük
+                    // Ha ez a tï¿½volsï¿½g a jelenlegi legkisebb tï¿½volsï¿½gnï¿½l kisebb, akkor frissï¿½tjï¿½k
                     if (distanceToLine < 0.01) {
                         nearestIndex = i;
                     }
@@ -248,10 +216,10 @@ public:
             }
     float distance(vec3 p, vec3 linePoint1, vec3 linePoint2)
     {
-        vec3 dir = linePoint2 - linePoint1; // Az egyenes irányvektora
-        vec3 v = p - linePoint1; // A pont és az egyenes kezdõpontja közötti vektor
+        vec3 dir = linePoint2 - linePoint1; // Az egyenes irï¿½nyvektora
+        vec3 v = p - linePoint1; // A pont ï¿½s az egyenes kezdï¿½pontja kï¿½zï¿½tti vektor
 
-        // Az egyenesre merõleges távolság kiszámítása a ponttól
+        // Az egyenesre merï¿½leges tï¿½volsï¿½g kiszï¿½mï¿½tï¿½sa a ponttï¿½l
         float distanceToLine = sqrt(
                 pow((dir.y * v.z - dir.z * v.y), 2) +
                 pow((dir.z * v.x - dir.x * v.z), 2) +
@@ -399,10 +367,10 @@ void onMouse(int button, int state, int pX, int pY) // pX, pY are the pixel coor
         case GLUT_DOWN: {
             buttonStat = "pressed";
             if (key_pressed[2]) {
-                nearestLineIndex = lines->near_line(vec3(cX, cY, 1)); // legközelebbi egyenes indexének lekérése
-                if (nearestLineIndex != -1) { // ha van legközelebbi egyenes
+                nearestLineIndex = lines->near_line(vec3(cX, cY, 1)); // legkï¿½zelebbi egyenes indexï¿½nek lekï¿½rï¿½se
+                if (nearestLineIndex != -1) { // ha van legkï¿½zelebbi egyenes
                     lines->setClicked(p1, p2,
-                                      nearestLineIndex); // kiválasztott egyenes kezdõ- és végpontjainak beállítása
+                                      nearestLineIndex); // kivï¿½lasztott egyenes kezdï¿½- ï¿½s vï¿½gpontjainak beï¿½llï¿½tï¿½sa
                     printf("Selected line  mozgatasra between (%f, %f) and (%f, %f)\n", p1.x, p1.y, p2.x, p2.y);
 
                 }
@@ -463,10 +431,10 @@ void onMouse(int button, int state, int pX, int pY) // pX, pY are the pixel coor
                 }
                 if (key_pressed[3] && state == GLUT_DOWN) // i
                 {
-                    if (p1.x != 0 && p1.y != 0) { // ellenõrizd, hogy már kiválasztottál-e egy egyenest
-                        nearestLineIndex = lines->near_line(vec3(cX, cY, 1)); // legközelebbi egyenes indexének lekérése
+                    if (p1.x != 0 && p1.y != 0) { // ellenï¿½rizd, hogy mï¿½r kivï¿½lasztottï¿½l-e egy egyenest
+                        nearestLineIndex = lines->near_line(vec3(cX, cY, 1)); // legkï¿½zelebbi egyenes indexï¿½nek lekï¿½rï¿½se
                         if (nearestLineIndex != -1)
-                        { // ha van legközelebbi egyenes
+                        { // ha van legkï¿½zelebbi egyenes
                             lines->setClicked(l1, l2, nearestLineIndex);
                             printf("Selected line between (%f, %f) and (%f, %f)\n", l1.x, l1.y, l2.x, l2.y);
                             vec3 p = Line::intersection(p1,p2,l1,l2);
@@ -482,10 +450,10 @@ void onMouse(int button, int state, int pX, int pY) // pX, pY are the pixel coor
                                 glutPostRedisplay();
                             }
                         }
-                    } else { // ha még nem választottál ki egy egyenest sem
-                        nearestLineIndex = lines->near_line(vec3(cX, cY, 1)); // legközelebbi egyenes indexének lekérése
-                        if (nearestLineIndex != -1) { // ha van legközelebbi egyenes
-                            lines->setClicked(p1, p2, nearestLineIndex); // kiválasztott egyenes kezdõ- és végpontjainak beállítása
+                    } else { // ha mï¿½g nem vï¿½lasztottï¿½l ki egy egyenest sem
+                        nearestLineIndex = lines->near_line(vec3(cX, cY, 1)); // legkï¿½zelebbi egyenes indexï¿½nek lekï¿½rï¿½se
+                        if (nearestLineIndex != -1) { // ha van legkï¿½zelebbi egyenes
+                            lines->setClicked(p1, p2, nearestLineIndex); // kivï¿½lasztott egyenes kezdï¿½- ï¿½s vï¿½gpontjainak beï¿½llï¿½tï¿½sa
                             printf("Selected first line between (%f, %f) and (%f, %f)\n", p1.x, p1.y, p2.x, p2.y);
 
                         }
